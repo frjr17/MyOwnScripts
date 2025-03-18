@@ -60,16 +60,11 @@ END
 echo '################################################'
 echo 'Setting up ZSH as default shell'
 echo '################################################'
-echo 'Please enter your password below'
-chsh -s /bin/zsh
-zsh
+sudo sed -i "s|^$USER:.*:$SHELL|$USER:x:$(id -u):$(id -g)::$HOME:/bin/zsh|" /etc/passwd
+
 
 # Step 9.) Changing powerlevel10k shorten strategy to truncate_to_last 
 echo '################################################'
 echo 'Changing powerlevel10k shorten strategy to truncate_to_last'
 echo '################################################'
 sed -i 's|typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique|typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_last|' ~/.p10k.zsh
-
-# Done
-exit
-
