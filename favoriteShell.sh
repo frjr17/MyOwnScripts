@@ -1,3 +1,4 @@
+# ¡IMPORTANT NOTE! This script only works for Ubuntu or debian based distros. 
 # Step 1.) Update Everything
 echo '################################################'
 echo 'Updating Everything'
@@ -26,11 +27,14 @@ git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zs
 echo '################################################'
 echo 'Installing Powerlevel10k plugins'
 echo '################################################'
+
+# ------- ZSH syntax highlighting 
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+# ------- ZSH syntax autosuggestions 
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+# ------- colorls 
 sudo apt install ruby-full -y
 sudo gem install colorls -f
-
 # ------- Adding plugins to .zshrc file 
 sed -i 's/^plugins=.*/plugins=( git zsh-syntax-highlighting zsh-autosuggestions )/' ~/.zshrc
 
@@ -59,7 +63,6 @@ echo '################################################'
 echo 'Please enter your password below'
 chsh -s /bin/zsh
 zsh
-
 
 # Step 9.) Changing powerlevel10k shorten strategy to truncate_to_last 
 echo '################################################'
