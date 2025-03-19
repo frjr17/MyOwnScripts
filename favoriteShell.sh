@@ -35,26 +35,10 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 # ------- colorls 
 sudo apt install ruby-full -y
 sudo gem install colorls -f
-# ------- Adding plugins to .zshrc file 
-sed -i 's/^plugins=.*/plugins=( git zsh-syntax-highlighting zsh-autosuggestions )/' ~/.zshrc
 
-# Step 6.) Setting up powerlevel10k as ZSH main theme
-echo '################################################'
-echo 'Setting up Powerlevel 10k as ZSH main theme'
-echo '################################################'
-sed -i 's|^ZSH_THEME=.*|ZSH_THEME=\"powerlevel10k/powerlevel10k\"|' ~/.zshrc
-
-# Step 7.) Adding custom aliases and colorls to ZSH
-cat <<END >> ~/.zshrc
-alias update='sudo apt update && sudo apt upgrade && sudo apt autoremove'
-alias rmdir='rm -rf'
-
-# Adding colorls to ls
-if [ -x "$(command -v colorls)" ]; then
-    alias ls="colorls"
-    alias la="colorls -al"
-fi
-END
+# Step 6.) Adding custom .zshrc file
+rm ~/.zshrc
+cp .zshrc ~
 
 # Step 8.) Setting up ZSH as default shell (password required) 
 echo '################################################'
