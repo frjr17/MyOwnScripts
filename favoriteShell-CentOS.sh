@@ -1,21 +1,21 @@
 #!/bin/bash
 
-# ¡IMPORTANT NOTE! This script is designed for CentOS or RHEL-based distros.
+# ¡IMPORTANT NOTE! This script only works for CentOS or RHEL-based distros.
 # Step 1.) Update Everything
 echo '################################################'
 echo 'Updating Everything'
 echo '################################################'
-sudo yum update -y && sudo yum upgrade -y && sudo yum autoremove -y
+sudo dnf update -y && sudo dnf upgrade -y && sudo dnf autoremove -y
 
 # Step 2.) Installing zsh
 echo '################################################'
 echo 'Installing ZSH'
 echo '################################################'
-sudo yum install zsh -y
+sudo dnf install zsh -y
 
 # Step 3.) Installing Oh My Zsh (Unattended mode)
 echo '################################################'
-echo 'Installing Oh My Zsh in unattended mode'
+echo 'Installing Oh my ZSH in unattended mode'
 echo '################################################'
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
@@ -39,7 +39,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 echo '################################################'
 echo 'Installing Ruby and ColorLS'
 echo '################################################'
-sudo yum install ruby -y
+sudo dnf install ruby -y
 sudo gem install colorls -f
 
 # Step 6.) Adding custom .zshrc file
