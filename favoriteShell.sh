@@ -40,7 +40,7 @@ sudo gem install colorls -f
 rm ~/.zshrc
 cp .zshrc ~
 
-# Step 8.) Setting up ZSH as default shell (password required) 
+# Step 8.) Setting up ZSH as default shell 
 echo '################################################'
 echo 'Setting up ZSH as default shell'
 echo '################################################'
@@ -62,3 +62,8 @@ node -v # Should print "v22.14.0".
 nvm current # Should print "v22.14.0".
 # Verify npm version:
 npm -v # Should print "10.9.2".
+
+exit
+
+# Step 11.) Installing Python env and pip
+sudo apt install python3-venv python3-pip -y
