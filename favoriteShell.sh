@@ -49,3 +49,16 @@ sudo sed -i "s|^$USER:.*:$SHELL|$USER:x:$(id -u):$(id -g)::$HOME:/bin/zsh|" /etc
 
 # Step 9.) Copying powerlevel10k config to user folder
 cp .p10k.zsh ~
+
+# Step 10.) Installing Node.js through NVM
+# Download and install nvm:
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
+# in lieu of restarting the shell
+\. "$HOME/.nvm/nvm.sh"
+# Download and install Node.js:
+nvm install --lts
+# Verify the Node.js version:
+node -v # Should print "v22.14.0".
+nvm current # Should print "v22.14.0".
+# Verify npm version:
+npm -v # Should print "10.9.2".
