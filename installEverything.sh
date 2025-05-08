@@ -10,8 +10,18 @@
 #   Google Chrome
 #   Telegram
 #   Variety
-
-# Install dev fonts
+#   Whatsapp
 
 # Install powerlevel10k theme for terminal
+#   Dev fonts
+#   ZSH
+#   Plugins + Colorls
+#   Common aliases
+
+# Install Development softwares
+#   Node.js (NVM)
+#   Python
+#   Go
+#   Java
+#   Vim
 
