@@ -1,5 +1,6 @@
 #!/bin/bash
 BASE_DIR=pwd
+USER=whoami
 
 # MacOS Theme
 WHITESUR_DIR='/tmp/WhiteSur_Installer'
@@ -7,6 +8,9 @@ git clone https://github.com/frjr17/WhiteSur_Installer.git $WHITESUR_DIR
 
 cd $WHITESUR_DIR
 sudo chmod +x *.sh
+xhost +SI:localuser:$USER
+export DISPLAY=:0
+firefox &
 sudo pkill firefox
 
 ./install.sh
