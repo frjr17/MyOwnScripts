@@ -18,8 +18,6 @@ git config --global user.email hernanadrianv17@gmail.com
 
 ssh-keygen -t rsa -q -f "$HOME/.ssh/id_rsa" -N ""
 
-
-
 #   Dev fonts
 cd $BASE_DIR/fonts
 unzip FiraCodeNF.zip
@@ -48,7 +46,7 @@ echo "alias rmdir=rm -rf" >> .zshrc
 echo "alias open=xdg-open" >> .zshrc
 echo "alias python=python3" >> .zshrc
 echo "alias venv_activate=source ./venv/bin/activate" >> .zshrc
-echo "alias create_venv=python -m venv venv" >> .zshrc
+echo "alias create_venv=python -m venv venv && venv_activate" >> .zshrc
 
 # UI apps 
 sudo ln -s /var/lib/snapd/snap /snap
