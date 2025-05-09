@@ -7,7 +7,7 @@ git clone https://github.com/frjr17/WhiteSur_Installer.git $WHITESUR_DIR
 
 cd $WHITESUR_DIR
 sudo chmod +x *.sh
-sudo pkill -9 firefox
+sudo pkill firefox
 
 ./install.sh
 
