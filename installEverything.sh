@@ -2,23 +2,24 @@
 BASE_DIR=pwd
 USER=whoami
 
+# Github Credentials
+GITHUB_NAME="Hernán Valencia"
+GITHUB_USERNAME="frjr17"
+GITHUB_EMAIL="hernanadrianv17@gmail.com"
+
 # MacOS Theme
 WHITESUR_DIR='/tmp/WhiteSur_Installer'
 git clone https://github.com/frjr17/WhiteSur_Installer.git $WHITESUR_DIR
 
 cd $WHITESUR_DIR
 sudo chmod +x *.sh
-xhost +SI:localuser:$USER
-export DISPLAY=:0
-firefox &
-sudo pkill firefox
 
 ./install.sh
 
 #Setup git config global
-git config --global user.name "Hernán Valencia"
-git config --global user.username frjr17
-git config --global user.email hernanadrianv17@gmail.com
+git config --global user.name $GITHUB_NAME
+git config --global user.username $GITHUB_USERNAME
+git config --global user.email $GITHUB_EMAIL
 
 ssh-keygen -t rsa -q -f "$HOME/.ssh/id_rsa" -N ""
 
@@ -84,3 +85,8 @@ sudo dnf install java-21-openjdk -y
 #   Vim
 sudo dnf install vim-enhanced -y
 
+
+#Cleaning Up
+cd 
+sudo rm -rf $WHITESUR_DIR
+sudo rm -rf ~/.frjr17Scripts
