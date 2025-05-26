@@ -32,6 +32,13 @@ pkill -9 firefox
 
 ./install.sh
 
+pipx ensurepath
+source ~/.bashrc
+pipx install gnome-extensions-cli --system-site-packages
+
+gnome-extensions-cli install hidetopbar@mathieu.bidon.ca 
+gnome-extensions-cli install dash2dock-lite@icedman.github.com 
+
 #Setup git config global
 git config --global user.name $GITHUB_NAME
 git config --global user.username $GITHUB_USERNAME
@@ -43,7 +50,7 @@ ssh-keygen -t rsa -q -f "$HOME/.ssh/id_rsa" -N ""
 #   Dev fonts
 cd $BASE_DIR/fonts
 unzip FiraCodeNF.zip
-unzip OperatorMono.zip
+unzip OperatorMonoLig.zip
 
 sudo mv *.ttf /usr/share/fonts # Fira Code 
 sudo mv *.otf /usr/share/fonts # Operator Mono
