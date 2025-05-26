@@ -1,13 +1,14 @@
 #!/bin/bash
 
-sudo dnf install zsh curl -y
 
-sudo dnf install ruby -y
+sudo dnf install zsh curl -y
+sudo dnf install ruby ruby-devel -y
 sudo dnf install rubygem-{irb,rake,rbs,rexml,typeprof,test-unit} ruby-bundled-gems -y
 sudo dnf install make automake gcc gcc-c++ kernel-devel -y
 sudo gem install colorls
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -24,7 +25,6 @@ if [ -x "$(command -v colorls)" ]; then
 fi
 END
 
-cp ./config/.p10k.zsh ~
 sed -i 's|typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique|typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_last|' ~/.p10k.zsh
 
 # Common aliases
