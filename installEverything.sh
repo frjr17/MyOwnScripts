@@ -1,6 +1,8 @@
 #!/bin/bash
-BASE_DIR=pwd
-USER=whoami
+sudo chmod +x *.sh
+
+BASE_DIR=$(pwd)
+USER=$(whoami)
 
 # Github Credentials
 GITHUB_NAME="Hernán Valencia"
@@ -8,6 +10,7 @@ GITHUB_USERNAME="frjr17"
 GITHUB_EMAIL="hernanadrianv17@gmail.com"
 
 # Install Development softwares
+cd $BASEDIR
 ./softwares.sh
 
 # Installing snapper for automatic backups
@@ -35,26 +38,19 @@ cd $BASE_DIR/fonts
 unzip FiraCodeNF.zip
 unzip OperatorMono.zip
 
-mv *.ttf /usr/share/fonts # Fira Code 
-mv *.otf /usr/share/fonts # Operator Mono
+sudo mv *.ttf /usr/share/fonts # Fira Code 
+sudo mv *.otf /usr/share/fonts # Operator Mono
+
 
 # Install powerlevel10k theme for terminal
+cd $BASEDIR
 ./favoriteShell.sh
 
 # UI apps 
-sudo ln -s /var/lib/snapd/snap /snap
-#   VS Code
-sudo snap install code --classic
-#   Spotify
-sudo snap install spotify
-#   Google Chrome
-sudo snap install google-chrome
-#   Telegram
-sudo snap install telegram-desktop
-#   Variety
-sudo dnf install variety
+cd $BASEDIR
+./apps.sh
 
 #Cleaning Up
-cd 
+cd $BASEDIR
 sudo rm -rf $WHITESUR_DIR
 sudo rm -rf ~/.frjr17Scripts

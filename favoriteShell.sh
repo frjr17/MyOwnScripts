@@ -1,5 +1,6 @@
 #!/bin/bash
 
+USER=$(whoami)
 
 sudo dnf install zsh curl -y
 sudo dnf install ruby ruby-devel -y
@@ -27,11 +28,14 @@ END
 
 sed -i 's|typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique|typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_last|' ~/.p10k.zsh
 
+# Setting up default shell to zsh
+sudo chsh -s $(which zsh) $USER
+
 # Common aliases
 cd
-echo "alias update=sudo dnf update && sudo dnf upgrade && sudo dnf autoremove" >> .zshrc
-echo "alias rmdir=rm -rf" >> .zshrc
-echo "alias open=xdg-open" >> .zshrc
-echo "alias python=python3" >> .zshrc
-echo "alias venv_activate=source ./venv/bin/activate" >> .zshrc
-echo "alias create_venv=python -m venv venv && venv_activate" >> .zshrc
+echo "alias update='sudo dnf update && sudo dnf upgrade && sudo dnf autoremove'" >> .zshrc
+echo "alias rmdir='rm -rf'" >> .zshrc
+echo "alias open='xdg-open'" >> .zshrc
+echo "alias python='python3'" >> .zshrc
+echo "alias venv_activate='source ./venv/bin/activate'" >> .zshrc
+echo "alias create_venv='python -m venv venv && venv_activate'" >> .zshrc
