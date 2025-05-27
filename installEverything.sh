@@ -52,8 +52,8 @@ cd $BASE_DIR/fonts
 unzip FiraCodeNF.zip
 unzip OperatorMonoLig.zip
 
-sudo mv *.ttf /usr/share/fonts # Fira Code 
-sudo mv *.otf /usr/share/fonts # Operator Mono
+sudo mv *.ttf ~/.local/share/fonts # Fira Code 
+sudo mv *.otf ~/.local/share/fonts # Operator Mono
 
 
 # Install powerlevel10k theme for terminal
