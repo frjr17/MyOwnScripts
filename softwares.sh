@@ -1,22 +1,86 @@
-
 #!/bin/bash
 
-#   Node.js (NVM)
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
-\. "$HOME/.nvm/nvm.sh"
+set -euo pipefail
+
+echo "🔧 Installing toolbox if not present..."
+sudo dnf install -y toolbox
+
+# ─────────────────────────────────────────────
+# Create Toolbox Container
+# ─────────────────────────────────────────────
+
+if toolbox list | grep -q '^dev\s'; then
+  echo "⚠️  Toolbox container 'dev' already exists. Skipping creation."
+else
+  echo "📦 Creating toolbox container 'dev'..."
+  toolbox create --container dev
+fi
+
+# ─────────────────────────────────────────────
+# Define Dev Setup Script Inside Toolbox
+# ─────────────────────────────────────────────
+
+echo "🚀 Installing development tools inside toolbox..."
+
+toolbox run --container dev bash << 'EOF'
+set -euo pipefail
+
+echo "📥 Updating container packages..."
+sudo dnf update -y
+
+# ───────────── ZSH Setup ─────────────
+echo "📦 Installing Zsh..."
+sudo dnf install -y zsh
+echo '[ -n "$PS1" ] && exec zsh' >> ~/.bashrc
+
+# ───────────── Language Tools ─────────────
+echo "🐍 Installing Python pip..."
+sudo dnf install -y python3-pip
+
+echo "💻 Installing Golang..."
+sudo dnf install -y golang
+
+echo "☕ Installing OpenJDK 21..."
+sudo dnf install -y java-21-openjdk
+
+# ───────────── NVM + Node.js ─────────────
+echo "🟩 Installing NVM..."
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+cat << 'EOC' >> ~/.zshrc
+
+# NVM config
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+EOC
+
+export NVM_DIR="$HOME/.nvm"
+source "$NVM_DIR/nvm.sh"
 nvm install --lts
 
-#   Python
-sudo dnf install python3-pip -y
+# ───────────── Visual Studio Code ─────────────
+echo "💻 Adding Microsoft VS Code repository..."
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 
-#   Go
-sudo dnf install golang -y 
-mkdir -p $HOME/go
-echo 'export GOPATH=$HOME/go' >> $HOME/.bashrc
-source $HOME/.bashrc
+sudo tee /etc/yum.repos.d/vscode.repo > /dev/null << 'EOR'
+[code]
+name=Visual Studio Code
+baseurl=https://packages.microsoft.com/yumrepos/vscode
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.microsoft.com/keys/microsoft.asc
+EOR
 
-#   Java 21 
-sudo dnf install java-21-openjdk -y
+echo "📦 Installing VS Code..."
+sudo dnf install -y code
 
-#   Vim
-sudo dnf install vim-enhanced -y
+echo "✅ All tools installed in toolbox: dev"
+EOF
+
+# ─────────────────────────────────────────────
+# Done
+# ─────────────────────────────────────────────
+
+echo "🎉 Dev toolbox 'dev' is ready!"
+echo "👉 Enter it anytime with: toolbox enter dev"
