@@ -10,7 +10,7 @@ GITHUB_NAME="Hernán Valencia"
 GITHUB_USERNAME="frjr17"
 GITHUB_EMAIL="hernanadrianv17@gmail.com"
 
-FONTS_DIR="$HOME/fonts"
+FONTS_DIR="./fonts"
 FONTS_DEST="$HOME/.local/share/fonts"
 
 ZSHRC="$HOME/.zshrc"
