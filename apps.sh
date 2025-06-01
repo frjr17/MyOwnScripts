@@ -48,4 +48,6 @@ EOF
 echo "📥 Installing VS Code..."
 sudo dnf install -y code
 
+sudo dnf install libreoffice -y
+
 echo "✅ All apps installed successfully!"

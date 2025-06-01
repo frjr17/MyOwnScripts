@@ -58,4 +58,10 @@ for ext in "${extensions[@]}"; do
   gnome-extensions-cli install "$ext" || echo "⚠️ Failed to install: $ext"
 done
 
+git clone https://github.com/vinceliuice/WhiteSur-icon-theme /tmp/WhiteSur-icon-theme
+cd /tmp/WhiteSur-icon-theme
+./install.sh
+
+gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur-dark'
+
 echo "✅ All done! Restart your GNOME session or run: gnome-shell --replace (on X11)"
