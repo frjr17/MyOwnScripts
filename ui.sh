@@ -41,8 +41,6 @@ sudo flatpak install -y flathub com.mattjakeman.ExtensionManager
 echo "🎨 Installing GNOME Shell extensions..."
 
 extensions=(
-  hidetopbar@mathieu.bidon.ca
-  dash2dock-lite@icedman.github.com
   user-theme@gnome-shell-extensions.gcampax.github.com
   blur-my-shell@aunetx
   dash-to-dock@micxgx.gmail.com
