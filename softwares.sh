@@ -59,21 +59,12 @@ export NVM_DIR="$HOME/.nvm"
 source "$NVM_DIR/nvm.sh"
 nvm install --lts
 
-# ───────────── Visual Studio Code ─────────────
-echo "💻 Adding Microsoft VS Code repository..."
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+echo "📥 Installing VS Code...(It requires a 10 seconds sleep to avoid snap bugs)"
+sleep 10
+sudo snap install code --classic
 
-sudo tee /etc/yum.repos.d/vscode.repo > /dev/null << 'EOR'
-[code]
-name=Visual Studio Code
-baseurl=https://packages.microsoft.com/yumrepos/vscode
-enabled=1
-gpgcheck=1
-gpgkey=https://packages.microsoft.com/keys/microsoft.asc
-EOR
 
-echo "📦 Installing VS Code..."
-sudo dnf install -y code
+
 
 echo "✅ All tools installed in toolbox: dev"
 EOF

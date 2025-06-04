@@ -45,8 +45,9 @@ gpgcheck=1
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc
 EOF
 
-echo "📥 Installing VS Code..."
-sudo dnf install -y code
+echo "📥 Installing VS Code...(It requires a 10 seconds sleep to avoid snap bugs)"
+sleep 10
+sudo snap install code --classic
 
 sudo dnf install libreoffice -y
 
