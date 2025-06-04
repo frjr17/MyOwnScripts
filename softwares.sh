@@ -28,10 +28,6 @@ set -euo pipefail
 echo "📥 Updating container packages..."
 sudo dnf update -y
 
-echo "📥 Installing snap"
-sudo dnf install snapd -y
-sudo ln -sf /var/lib/snapd/snap /snap
-
 # ───────────── ZSH Setup ─────────────
 echo "📦 Installing Zsh..."
 sudo dnf install -y zsh
@@ -62,10 +58,6 @@ EOC
 export NVM_DIR="$HOME/.nvm"
 source "$NVM_DIR/nvm.sh"
 nvm install --lts
-
-echo "📥 Installing VS Code...(It requires a 10 seconds sleep to avoid snap bugs)"
-sleep 10
-sudo snap install code --classic
 
 echo "📥 Installing my favorite shell"
 sudo dnf install -y \
