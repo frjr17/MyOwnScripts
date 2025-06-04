@@ -63,8 +63,16 @@ echo "📥 Installing VS Code...(It requires a 10 seconds sleep to avoid snap bu
 sleep 10
 sudo snap install code --classic
 
+echo "📥 Installing my favorite shell"
+sudo dnf install -y \
+    zsh curl ruby ruby-devel \
+    rubygem-{irb,rake,rbs,rexml,typeprof,test-unit} ruby-bundled-gems \
+    make automake gcc gcc-c++ kernel-devel
 
+sudo gem install colorls
 
+echo "💻 Setting Zsh as default shell for user: $(whoami)"
+chsh -s "$(which zsh)" "$(whoami)"
 
 echo "✅ All tools installed in toolbox: dev"
 EOF
