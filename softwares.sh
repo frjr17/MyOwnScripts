@@ -28,6 +28,10 @@ set -euo pipefail
 echo "📥 Updating container packages..."
 sudo dnf update -y
 
+echo "📥 Installing snap"
+sudo dnf install snapd -y
+sudo ln -sf /var/lib/snapd/snap /snap
+
 # ───────────── ZSH Setup ─────────────
 echo "📦 Installing Zsh..."
 sudo dnf install -y zsh
