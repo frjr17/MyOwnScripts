@@ -23,6 +23,24 @@ sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flat
 echo "📥 Installing Flatpak apps..."
 flatpak install -y flathub org.telegram.desktop
 flatpak install -y flathub com.spotify.Client
+mkdir ~/.config/systemd/user
+touch ~/.config/systemd/user/spotify.service
+
+cat << 'EOF' >> ~/.config/systemd/user/spotify.service
+[Unit]
+Description=Launch Spotify (Flatpak)
+After=graphical-session.target
+
+[Service]
+ExecStart=flatpak run com.spotify.Client
+Restart=on-failure
+TimeoutStopSec=5
+KillSignal=SIGINT
+
+[Install]
+WantedBy=default.target
+EOF
+
 
 # Note: Microsoft Edge is unofficial via Flathub Beta
 flatpak install -y flathub-beta com.microsoft.Edge || echo "⚠️ Edge Flatpak may be unavailable or unofficial."
