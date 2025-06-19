@@ -28,11 +28,13 @@ touch ~/.config/systemd/user/spotify.service
 
 cat << 'EOF' >> ~/.config/systemd/user/spotify.service
 [Unit]
-Description=Launch Spotify (Flatpak)
+Description=Prevent suspend when Spotify is running
 After=graphical-session.target
+Requires=spotify.service
+PartOf=spotify.service
 
 [Service]
-ExecStart=flatpak run com.spotify.Client
+ExecStart=/usr/bin/systemd-inhibit --what=handle-lid-switch:sleep --why="Spotify is running" flatpak run com.spotify.Client
 Restart=on-failure
 TimeoutStopSec=5
 KillSignal=SIGINT
@@ -40,6 +42,10 @@ KillSignal=SIGINT
 [Install]
 WantedBy=default.target
 EOF
+
+sudo systemctl --user daemon-reload
+sudo systemctl --user enable --now spotify-inhibit.service
+
 
 
 # Note: Microsoft Edge is unofficial via Flathub Beta
