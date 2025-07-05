@@ -13,7 +13,7 @@ git clone https://github.com/frjr17/WhiteSur_Installer.git /tmp/WhiteSur_Install
 cd /tmp/WhiteSur_Installer
 chmod +x *.sh
 
-firefox
+firefox &
 sleep 5
 pkill firefox
 echo "🌟 Installing WhiteSur theme and icons..."
