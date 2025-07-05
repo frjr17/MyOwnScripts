@@ -101,4 +101,6 @@ EOF
 echo "💻 Setting Zsh as default shell for user: $USER"
 chsh -s "$(which zsh)" "$USER"
 
+exec zsh
+
 echo "✅ Setup complete! Restart your terminal or run: exec zsh"
