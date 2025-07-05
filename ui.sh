@@ -9,6 +9,16 @@ set -euo pipefail
 echo "📦 Updating system packages..."
 sudo dnf update -y
 
+git clone https://github.com/frjr17/WhiteSur_Installer.git /tmp/WhiteSur_Installer
+cd /tmp/WhiteSur_Installer
+chmod +x *.sh
+
+firefox
+sleep 5
+pkill firefox
+echo "🌟 Installing WhiteSur theme and icons..."
+./install.sh
+
 # ─────────────────────────────────────────────
 # Install pipx and gnome-extensions-cli
 # ─────────────────────────────────────────────
@@ -55,11 +65,5 @@ for ext in "${extensions[@]}"; do
   echo "→ Installing $ext"
   gnome-extensions-cli install "$ext" || echo "⚠️ Failed to install: $ext"
 done
-
-git clone https://github.com/vinceliuice/WhiteSur-icon-theme /tmp/WhiteSur-icon-theme
-cd /tmp/WhiteSur-icon-theme
-./install.sh
-
-gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur-dark'
 
 echo "✅ All done! Restart your GNOME session or run: gnome-shell --replace (on X11)"
