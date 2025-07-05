@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo dnf update -y
+
 sudo dnf install snapper libdnf5-plugin-actions btrfs-assistant inotify-tools git make -y
 
 sudo bash -c "cat > /etc/dnf/libdnf5-plugins/actions.d/snapper.actions" <<'EOF'

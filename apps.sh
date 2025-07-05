@@ -8,7 +8,6 @@ sudo dnf update -y
 # ─────────────────────────────────────────────
 # Snap Setup
 # ─────────────────────────────────────────────
-
 echo "🛠️ Installing Snap support..."
 sudo dnf install -y snapd
 sudo ln -sf /var/lib/snapd/snap /snap
@@ -16,13 +15,13 @@ sudo ln -sf /var/lib/snapd/snap /snap
 # ─────────────────────────────────────────────
 # Flatpak + Flathub Setup
 # ─────────────────────────────────────────────
-
 echo "🧩 Setting up Flatpak and Flathub..."
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 echo "📥 Installing Flatpak apps..."
 flatpak install -y flathub org.telegram.desktop
 flatpak install -y flathub com.spotify.Client
+
 mkdir ~/.config/systemd/user
 touch ~/.config/systemd/user/spotify.service
 
@@ -45,8 +44,6 @@ EOF
 
 sudo systemctl --user daemon-reload
 sudo systemctl --user enable --now spotify-inhibit.service
-
-
 
 # Note: Microsoft Edge is unofficial via Flathub Beta
 flatpak install -y flathub-beta com.microsoft.Edge || echo "⚠️ Edge Flatpak may be unavailable or unofficial."
