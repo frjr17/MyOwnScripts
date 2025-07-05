@@ -91,8 +91,6 @@ alias create_venv='python -m venv venv && venv_activate'
 
 EOF
 
-# Powerlevel10k tweak (optional)
-[[ -f "$P10K_FILE" ]] && sed -i 's|POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique|POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_last|' "$P10K_FILE" || true
 
 # ─────────────────────────────────────────────
 # Set Zsh as Default Shell
@@ -102,5 +100,8 @@ echo "💻 Setting Zsh as default shell for user: $USER"
 chsh -s "$(which zsh)" "$USER"
 
 exec zsh
+
+# Powerlevel10k tweak (optional)
+[[ -f "$P10K_FILE" ]] && sed -i 's|POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique|POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_last|' "$P10K_FILE" || true
 
 echo "✅ Setup complete! Restart your terminal or run: exec zsh"
