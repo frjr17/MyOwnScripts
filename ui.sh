@@ -111,7 +111,7 @@ echo "✅ Brave installed successfully."
 
 # Spotify
 echo "🎵 Installing Spotify..."
-snap install -y spotify
+sudo snap install spotify
 echo "✅ Spotify installed successfully."
 
 # Visual Studio Code
@@ -131,6 +131,6 @@ echo "✅ Google Drive File Stream Driver installed successfully."
 
 # Telegram
 echo "📱 Installing Telegram..."
-sudo snap install -y telegram-desktop 
+sudo snap install telegram-desktop 
 
 echo "✅ All done! Restart your GNOME session or run: gnome-shell --replace (on X11)"
