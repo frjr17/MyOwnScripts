@@ -6,9 +6,18 @@ set -euo pipefail
 # Constants & Variables
 # ─────────────────────────────────────────────
 
-GITHUB_NAME="Hernán Valencia"
-GITHUB_USERNAME="frjr17"
-GITHUB_EMAIL="hernanadrianv17@gmail.com"
+ENV_FILE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/.env"
+
+if [[ -f "$ENV_FILE" ]]; then
+  set -a
+  # shellcheck disable=SC1090
+  source "$ENV_FILE"
+  set +a
+fi
+
+: "${GITHUB_NAME:=Hernán Valencia}"
+: "${GITHUB_USERNAME:=frjr17}"
+: "${GITHUB_EMAIL:=hernanadrianv17@gmail.com}"
 
 FONTS_DIR="./fonts"
 FONTS_DEST="$HOME/.local/share/fonts"
