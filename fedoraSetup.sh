@@ -9,10 +9,10 @@ set -euo pipefail
 echo "⌨️ Setting up custom keyboard shortcuts..."
 
 # Window movement between monitors
-gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-down "['<Control><Alt>Down']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-left "['<Control><Alt>Left']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-right "['<Control><Alt>Right']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-up "['<Control><Alt>Up']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-down "['<Shift><Alt>Down']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-left "['<Shift><Alt>Left']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-right "['<Shift><Alt>Right']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-up "['<Shift><Alt>Up']"
 
 # Workspace navigation
 gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-left "['<Shift><Super>Left']"
