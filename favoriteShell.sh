@@ -89,8 +89,46 @@ alias python='python3'
 alias venv_activate='source ./venv/bin/activate'
 alias create_venv='python -m venv venv && venv_activate'
 
-EOF
+outlinepdf() {
+  if [[ $# -ne 1 ]]; then
+    echo "Usage: outlinepdf file.pdf"
+    return 1
+  fi
 
+  local input="$1"
+
+  if [[ ! -f "$input" ]]; then
+    echo "File not found: $input"
+    return 1
+  fi
+
+  if [[ "${input:l}" != *.pdf ]]; then
+    echo "Input must be a PDF: $input"
+    return 1
+  fi
+
+  local dir="${input:h}"
+  local name="${input:t}"
+  local backup="${dir}/${name:r}.original.pdf"
+  local temp="${dir}/.${name:r}.outlined.tmp.pdf"
+
+  cp "$input" "$backup"
+
+  gs \
+    -o "$temp" \
+    -sDEVICE=pdfwrite \
+    -dNoOutputFonts \
+    -dNOPAUSE \
+    -dBATCH \
+    -dSAFER \
+    "$input"
+
+  mv "$temp" "$input"
+
+  echo "Outlined PDF saved as: $input"
+  echo "Original backup saved as: $backup"
+}
+EOF
 
 # ─────────────────────────────────────────────
 # Set Zsh as Default Shell
