@@ -26,8 +26,6 @@ Keyboard Commands
   - Show the notification list - Super + N
   - Toggle fullscreen mode - F4
   - Open Nautilus (Custom Shorcut) -  Super + E 
-Onedrive and Google Drive clouds
-
 
 
 ## Programming (Development Setup)
