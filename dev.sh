@@ -11,11 +11,14 @@ echo "Installing Vim"
 sudo dnf install -y vim
 echo "✅ Vim installed!"
 
-echo "Installing favorite shell (Zsh) and Oh My Zsh..."
+# Oh My Zsh with Powerlevel10k
 ./favoriteShell.sh
-echo "✅ Shell setup complete!"
 
+# Install NVM (Node Version Manager with Node.js & npm)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+nvm install --lts
+echo "✅ NVM and Node.js installed!"
 
 echo "✅ Development environment setup complete!"
