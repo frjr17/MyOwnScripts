@@ -15,9 +15,9 @@ if [[ -f "$ENV_FILE" ]]; then
   set +a
 fi
 
-: "${GITHUB_NAME:=Hernán Valencia}"
-: "${GITHUB_USERNAME:=frjr17}"
-: "${GITHUB_EMAIL:=hernanadrianv17@gmail.com}"
+: "${GITHUB_NAME}"
+: "${GITHUB_USERNAME}"
+: "${GITHUB_EMAIL}"
 
 FONTS_DIR="./fonts"
 FONTS_DEST="$HOME/.local/share/fonts"
