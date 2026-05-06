@@ -133,4 +133,18 @@ echo "✅ Google Drive File Stream Driver installed successfully."
 echo "📱 Installing Telegram..."
 sudo snap install telegram-desktop 
 
+# Docker Desktop
+echo "🚢 Installing Docker Desktop..."
+cd /tmp
+wget https://desktop.docker.com/linux/main/amd64/docker-desktop-x86_64.rpm -O docker-desktop.rpm
+sudo dnf install -y ./docker-desktop-x86_64.rpm
+echo "✅ Docker Desktop installed successfully."
+
+# Musecore
+echo "🎼 Installing Musecore..."
+wget https://cdn.jsdelivr.net/musescore/v4.6.5/MuseScore-Studio-4.6.5.253511702-x86_64.AppImage
+chmod +x MuseScore-Studio-4.6.5.253511702-x86_64.AppImage
+./MuseScore-Studio-4.6.5.253511702-x86_64.AppImage install
+# Linux Dynamic Templates
+
 echo "✅ All done! Restart your GNOME session or run: gnome-shell --replace (on X11)"
