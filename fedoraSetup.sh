@@ -9,14 +9,14 @@ set -euo pipefail
 echo "⌨️ Setting up custom keyboard shortcuts..."
 
 # Window movement between monitors
-gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-down "['<Shift><Alt>Down']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-left "['<Shift><Alt>Left']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-right "['<Shift><Alt>Right']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-up "['<Shift><Alt>Up']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-down "['<Shift><Super>Down']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-left "['<Shift><Super>Left']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-right "['<Shift><Super>Right']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-up "['<Shift><Super>Up']"
 
 # Workspace navigation
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-left "['<Shift><Super>Left']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-right "['<Shift><Super>Right']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-left "['<Shift><Alt>Left']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-right "['<Shift><Alt>Right']"
 
 # Fullscreen toggle
 gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['F4']"
