@@ -9,13 +9,11 @@ set -euo pipefail
 echo "📦 Updating system packages..."
 sudo dnf update -y
 
-git clone https://github.com/frjr17/WhiteSur_Installer.git /tmp/WhiteSur_Installer
+git clone https://github.com/frjr17/WhiteSurInstaller.git /tmp/WhiteSur_Installer
 cd /tmp/WhiteSur_Installer
 chmod +x *.sh
 
-firefox &
-sleep 5
-pkill firefox
+
 echo "🌟 Installing WhiteSur theme and icons..."
 ./install.sh
 
@@ -98,6 +96,9 @@ gnome-extensions install --force ./hidetopbar.zip
 # ─────────────────────────────────────────────
 # Installing apps
 # ─────────────────────────────────────────────
+
+sudo dnf install snapd -y
+sudo ln -s /var/lib/snapd/snap /snap
 
 # LibreOffice
 echo "📚 Installing LibreOffice..."
