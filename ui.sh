@@ -2,19 +2,22 @@
 
 set -euo pipefail
 
+
 # ─────────────────────────────────────────────
 # Update system
 # ─────────────────────────────────────────────
-
 echo "📦 Updating system packages..."
 sudo dnf update -y
 
-git clone https://github.com/frjr17/WhiteSurInstaller.git /tmp/WhiteSur_Installer
-cd /tmp/WhiteSur_Installer
+
+# Entering temporary directory for all operations
+cd /tmp
+
+echo "🌟 Installing WhiteSur theme"
+git clone https://github.com/frjr17/WhiteSurInstaller.git 
+cd ./WhiteSurInstaller
+
 chmod +x *.sh
-
-
-echo "🌟 Installing WhiteSur theme and icons..."
 ./install.sh
 
 # ─────────────────────────────────────────────
@@ -46,8 +49,8 @@ sudo flatpak install -y flathub com.mattjakeman.ExtensionManager
 # Install GNOME Extensions via CLI
 # ─────────────────────────────────────────────
 
-echo "🎨 Installing GNOME Shell extensions..."
 
+echo "🎨 Installing GNOME Shell extensions..."
 extensions=(
   user-theme@gnome-shell-extensions.gcampax.github.com
   blur-my-shell@aunetx
@@ -64,7 +67,7 @@ done
 
 
 # Install MoveClock extension from GitHub releases
-cd /tmp
+echo "⏰ Installing MoveClock"
 rm -rf moveclock moveclock@kuvaus.org.shell-extension.zip
 
 wget https://github.com/kuvaus/moveclock/releases/latest/download/moveclock@kuvaus.org.shell-extension.zip
@@ -73,7 +76,7 @@ gnome-extensions install --force moveclock@kuvaus.org.shell-extension.zip
 gnome-extensions enable moveclock@kuvaus.org
 
 # Installing Compiz Alike Magic Lamp Effect
-cd /tmp
+echo "✨ Installing Compiz Alike Magic Lamp Effect"
 rm -rf compiz-alike-magic-lamp-effect
 
 git clone https://github.com/hermes83/compiz-alike-magic-lamp-effect.git
@@ -84,7 +87,7 @@ bash install.sh
 gnome-extensions enable compiz-alike-magic-lamp-effect@hermes83.github.com
 
 # Installing Hide Top Bar extension
-cd /tmp
+echo "🔝 Installing Hide Top Bar extension"
 rm -rf hidetopbar
 
 git clone https://gitlab.gnome.org/tuxor1337/hidetopbar.git
@@ -94,9 +97,24 @@ make
 gnome-extensions install --force ./hidetopbar.zip
 
 # ─────────────────────────────────────────────
+# Installing RPM Fusion
+# ─────────────────────────────────────────────
+echo "📦 Enabling RPM Fusion repositories..."
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+echo "✅ RPM Fusion repositories enabled successfully."
+
+# ─────────────────────────────────────────────
+# Installing Multimedia codecs and drivers
+# ─────────────────────────────────────────────
+echo "📦 Installing multimedia codecs and drivers..."
+sudo dnf upgrade --refresh
+sudo dnf install intel-media-driver libva-utils libavcodec-freeworld
+echo "✅ Multimedia codecs and drivers installed successfully."
+
+# ─────────────────────────────────────────────
 # Installing apps
 # ─────────────────────────────────────────────
-
+echo "📦 Installing Snapd..."
 sudo dnf install snapd -y
 sudo ln -s /var/lib/snapd/snap /snap
 
@@ -133,10 +151,10 @@ echo "✅ Google Drive File Stream Driver installed successfully."
 # Telegram
 echo "📱 Installing Telegram..."
 sudo snap install telegram-desktop 
+echo "✅ Telegram installed successfully."
 
 # Docker Desktop
 echo "🚢 Installing Docker Desktop..."
-cd /tmp
 wget https://desktop.docker.com/linux/main/amd64/docker-desktop-x86_64.rpm -O docker-desktop.rpm
 sudo dnf install -y ./docker-desktop-x86_64.rpm
 echo "✅ Docker Desktop installed successfully."
@@ -146,6 +164,18 @@ echo "🎼 Installing Musecore..."
 wget https://cdn.jsdelivr.net/musescore/v4.6.5/MuseScore-Studio-4.6.5.253511702-x86_64.AppImage
 chmod +x MuseScore-Studio-4.6.5.253511702-x86_64.AppImage
 ./MuseScore-Studio-4.6.5.253511702-x86_64.AppImage install
+echo "✅ Musecore installed successfully."
+
 # Linux Dynamic Templates
+echo "📁 Installing Linux Dynamic Templates..."
+git clone https://github.com/frjr17/LinuxDynamicWallpapers.git
+cd LinuxDynamicWallpapers
+sudo bash ./install.sh
+echo "✅ Linux Dynamic Templates installed successfully."
+
+# Thunderbird
+echo "📧 Installing Thunderbird..."
+sudo dnf install -y thunderbird
+echo "✅ Thunderbird installed successfully."
 
 echo "✅ All done! Restart your GNOME session or run: gnome-shell --replace (on X11)"
