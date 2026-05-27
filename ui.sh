@@ -49,7 +49,6 @@ sudo flatpak install -y flathub com.mattjakeman.ExtensionManager
 # Install GNOME Extensions via CLI
 # ─────────────────────────────────────────────
 
-
 echo "🎨 Installing GNOME Shell extensions..."
 extensions=(
   user-theme@gnome-shell-extensions.gcampax.github.com
@@ -64,7 +63,6 @@ for ext in "${extensions[@]}"; do
   echo "→ Installing $ext"
   gnome-extensions-cli install "$ext" || echo "⚠️ Failed to install: $ext"
 done
-
 
 # Install MoveClock extension from GitHub releases
 echo "⏰ Installing MoveClock"
@@ -99,6 +97,7 @@ gnome-extensions install --force ./hidetopbar.zip
 # ─────────────────────────────────────────────
 # Installing RPM Fusion
 # ─────────────────────────────────────────────
+
 echo "📦 Enabling RPM Fusion repositories..."
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 echo "✅ RPM Fusion repositories enabled successfully."
@@ -106,6 +105,7 @@ echo "✅ RPM Fusion repositories enabled successfully."
 # ─────────────────────────────────────────────
 # Installing Multimedia codecs and drivers
 # ─────────────────────────────────────────────
+
 echo "📦 Installing multimedia codecs and drivers..."
 sudo dnf upgrade --refresh
 sudo dnf install intel-media-driver libva-utils libavcodec-freeworld
@@ -114,6 +114,7 @@ echo "✅ Multimedia codecs and drivers installed successfully."
 # ─────────────────────────────────────────────
 # Installing apps
 # ─────────────────────────────────────────────
+
 echo "📦 Installing Snapd..."
 sudo dnf install snapd -y
 sudo ln -s /var/lib/snapd/snap /snap
