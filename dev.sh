@@ -11,9 +11,6 @@ echo "Installing Vim"
 sudo dnf install -y vim
 echo "✅ Vim installed!"
 
-# Oh My Zsh with Powerlevel10k
-./favoriteShell.sh
-
 # Install NVM (Node Version Manager with Node.js & npm)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
@@ -36,7 +33,8 @@ sudo dnf remove -y docker \
 
 sudo dnf config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
 sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
- sudo systemctl enable --now docker
+
+sudo systemctl enable --now docker
 echo "✅ Docker installed and running!"
 
 
