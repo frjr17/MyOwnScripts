@@ -51,3 +51,5 @@ HandleLidSwitch=ignore
 HandleLidSwitchExternalPower=ignore
 HandleLidSwitchDocked=ignore
 EOF
+
+echo "✅ Lid-close behavior configured! (Requires reboot to take effect)"
