@@ -18,6 +18,14 @@ export NVM_DIR="$HOME/.nvm"
 nvm install --lts
 echo "✅ NVM and Node.js installed!"
 
+# Install repository .npmrc into the user's home so npm uses consistent defaults
+if [ -f "$(pwd)/.npmrc" ]; then
+    cp "$(pwd)/.npmrc" "$HOME/.npmrc"
+    echo "✅ .npmrc copied to $HOME/.npmrc"
+else
+    echo "ℹ️ .npmrc not found in repo; skipping npm config install"
+fi
+
 # Docker
 echo "🚢 Setting up Docker..."
 sudo dnf remove -y docker \
