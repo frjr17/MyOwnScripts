@@ -39,7 +39,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 echo "✅ Keyboard shortcuts configured!"
 
 # ─────────────────────────────────────────────
-# Lid Close Behavior
+# Display Behavior
 # ─────────────────────────────────────────────
 
 # Prevent suspend when the laptop lid is closed
@@ -51,5 +51,8 @@ HandleLidSwitch=ignore
 HandleLidSwitchExternalPower=ignore
 HandleLidSwitchDocked=ignore
 EOF
+
+# Also set the power button to show the interactive dialog instead of shutting down immediately
+gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
 
 echo "✅ Lid-close behavior configured! (Requires reboot to take effect)"
