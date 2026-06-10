@@ -43,7 +43,10 @@ sudo dnf config-manager addrepo --from-repofile https://download.docker.com/linu
 sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 sudo systemctl enable --now docker
+sudo usermod -aG docker "$USER"
+newgrp docker
+
 echo "✅ Docker installed and running!"
 
 
-echo "✅ Development environment setup complete!"
+echo "✅ Development environment setup complete! (Please restart your computer to apply changes)"
