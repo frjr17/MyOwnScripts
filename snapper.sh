@@ -1,9 +1,15 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
+# ─────────────────────────────────────────────
+# Install Packages
+# ─────────────────────────────────────────────
 sudo dnf update -y
-
 sudo dnf install snapper libdnf5-plugin-actions btrfs-assistant inotify-tools git make -y
 
+# ─────────────────────────────────────────────
+# DNF Snapper Actions Plugin
+# ─────────────────────────────────────────────
 sudo bash -c "cat > /etc/dnf/libdnf5-plugins/actions.d/snapper.actions" <<'EOF'
 # Get snapshot description
 pre_transaction::::/usr/bin/sh -c echo\ "tmp.cmd=$(ps\ -o\ command\ --no-headers\ -p\ '${pid}')"
@@ -15,6 +21,9 @@ pre_transaction::::/usr/bin/sh -c echo\ "tmp.snapper_pre_number=$(snapper\ creat
 post_transaction::::/usr/bin/sh -c [\ -n\ "${tmp.snapper_pre_number}"\ ]\ &&\ snapper\ create\ -t\ post\ --pre-number\ "${tmp.snapper_pre_number}"\ -c\ number\ -d\ "${tmp.cmd}"\ ;\ echo\ tmp.snapper_pre_number\ ;\ echo\ tmp.cmd
 EOF
 
+# ─────────────────────────────────────────────
+# Snapper Configs
+# ─────────────────────────────────────────────
 sudo snapper -c root create-config /
 sudo snapper -c home create-config /home
 
@@ -26,8 +35,11 @@ sudo snapper -c home set-config ALLOW_USERS=$USER SYNC_ACL=yes
 
 echo 'PRUNENAMES = ".snapshots"' | sudo tee -a /etc/updatedb.conf
 
-# Installing grub-btrfs
-cd /tmp 
+# ─────────────────────────────────────────────
+# grub-btrfs
+# ─────────────────────────────────────────────
+cd /tmp
+rm -rf grub-btrfs   # rerun-safe: git clone aborts under set -e if the dir exists
 git clone https://github.com/Antynea/grub-btrfs
 cd grub-btrfs
 
@@ -48,7 +60,9 @@ sudo systemctl enable --now grub-btrfsd.service
 cd ..
 rm -rfv grub-btrfs
 
-# Enabling automatic snapshots
+# ─────────────────────────────────────────────
+# Automatic Snapshots
+# ─────────────────────────────────────────────
 sudo snapper -c home set-config TIMELINE_CREATE=no
 sudo systemctl enable --now snapper-timeline.timer
 sudo systemctl enable --now snapper-cleanup.timer

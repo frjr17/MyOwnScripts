@@ -1,23 +1,27 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
 set -euo pipefail
 
-# ─────────────────────────────────────────────
-# Installing Dev Setup
-# ─────────────────────────────────────────────
 echo "🚀 Setting up development environment..."
 
+# ─────────────────────────────────────────────
+# Vim
+# ─────────────────────────────────────────────
 echo "Installing Vim"
 sudo dnf install -y vim
 echo "✅ Vim installed!"
 
-# Install NVM (Node Version Manager with Node.js & npm)
+# ─────────────────────────────────────────────
+# NVM, Node.js & npm
+# ─────────────────────────────────────────────
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 nvm install --lts
 echo "✅ NVM and Node.js installed!"
 
+# ─────────────────────────────────────────────
+# npm Configuration
+# ─────────────────────────────────────────────
 # Install repository .npmrc into the user's home so npm uses consistent defaults
 if [ -f "$(pwd)/.npmrc" ]; then
     cp "$(pwd)/.npmrc" "$HOME/.npmrc"
@@ -26,7 +30,9 @@ else
     echo "ℹ️ .npmrc not found in repo; skipping npm config install"
 fi
 
+# ─────────────────────────────────────────────
 # Docker
+# ─────────────────────────────────────────────
 echo "🚢 Setting up Docker..."
 sudo dnf remove -y docker \
                   docker-client \

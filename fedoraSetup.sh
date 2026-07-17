@@ -24,14 +24,14 @@ gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-right "['<Shift
 gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['F4']"
 
 # Show applications (Activities)
-gsettings set org.gnome.shell.keybindings show-applications "['<Super>a']"
+gsettings set org.gnome.shell.keybindings toggle-application-view "['<Super>a']"
 
 # Notifications
 gsettings set org.gnome.shell.keybindings toggle-message-tray "['<Super>n']"
 
 
 # Settings
-gsettings set org.gnome.shell.keybindings open-application-grid "['<Super>i']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys control-center "['<Super>i']"
 
 # "Open File Explorer" shortcut (custom one)
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'Open File Explorer'

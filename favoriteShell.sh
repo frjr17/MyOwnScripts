@@ -1,23 +1,43 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
 set -euo pipefail
 
 # ─────────────────────────────────────────────
 # Constants & Variables
 # ─────────────────────────────────────────────
 
-ENV_FILE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/.env"
+GITHUB_NAME="" GITHUB_USERNAME="" GITHUB_EMAIL=""
 
-if [[ -f "$ENV_FILE" ]]; then
-  set -a
-  # shellcheck disable=SC1090
-  source "$ENV_FILE"
-  set +a
-fi
+usage() {
+  cat <<EOF
+Usage: $0 [--name NAME] [--username USERNAME] [--email EMAIL]
 
-: "${GITHUB_NAME}"
-: "${GITHUB_USERNAME}"
-: "${GITHUB_EMAIL}"
+Any Git identity value not passed as a flag is prompted for interactively.
+For automated (non-interactive) runs, pass all three flags.
+EOF
+  exit 1
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --name)     GITHUB_NAME="$2";     shift 2 ;;
+    --username) GITHUB_USERNAME="$2"; shift 2 ;;
+    --email)    GITHUB_EMAIL="$2";    shift 2 ;;
+    -h|--help)  usage ;;
+    *) echo "❌ Unknown option: $1" >&2; usage ;;
+  esac
+done
+
+# Prompt for anything still missing; fail fast if we can't (automated run w/o flags).
+prompt_missing() {
+  local var="$1" label="$2" flag="${1#GITHUB_}"
+  [[ -n "${!var}" ]] && return 0
+  [[ -t 0 ]] || { echo "❌ Missing --${flag,,} and no terminal to prompt." >&2; exit 1; }
+  read -rp "$label: " "$var"
+  [[ -n "${!var}" ]] || { echo "❌ $label is required." >&2; exit 1; }
+}
+prompt_missing GITHUB_NAME     "Git full name"
+prompt_missing GITHUB_USERNAME "GitHub username"
+prompt_missing GITHUB_EMAIL    "Git email"
 
 FONTS_DIR="./fonts"
 FONTS_DEST="$HOME/.local/share/fonts"
