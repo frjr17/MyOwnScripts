@@ -57,21 +57,13 @@ extensions=(
   logomenu@aryan_k
   Hide_Activities@shay.shayel.org
   just-perfection-desktop@just-perfection
+  moveclock@kuvaus.org
 )
 
 for ext in "${extensions[@]}"; do
   echo "→ Installing $ext"
   gnome-extensions-cli install "$ext" || echo "⚠️ Failed to install: $ext"
 done
-
-# Install MoveClock extension from GitHub releases
-echo "⏰ Installing MoveClock"
-rm -rf moveclock moveclock@kuvaus.org.shell-extension.zip
-
-wget https://github.com/kuvaus/moveclock/releases/latest/download/moveclock@kuvaus.org.shell-extension.zip
-
-gnome-extensions install --force moveclock@kuvaus.org.shell-extension.zip
-gnome-extensions enable moveclock@kuvaus.org
 
 # Installing Compiz Alike Magic Lamp Effect
 echo "✨ Installing Compiz Alike Magic Lamp Effect"
@@ -81,8 +73,7 @@ git clone https://github.com/hermes83/compiz-alike-magic-lamp-effect.git
 cd compiz-alike-magic-lamp-effect
 
 bash install.sh
-
-gnome-extensions enable compiz-alike-magic-lamp-effect@hermes83.github.com
+echo "✅ Compiz Alike Magic Lamp Effect installed successfully. (You may need to restart GNOME Shell for the changes to take effect.)"
 
 # Installing Hide Top Bar extension
 echo "🔝 Installing Hide Top Bar extension"
@@ -92,7 +83,7 @@ git clone https://gitlab.gnome.org/tuxor1337/hidetopbar.git
 cd hidetopbar
 
 make
-gnome-extensions install --force ./hidetopbar.zip
+gnome-extensions-cli install ./hidetopbar.zip
 
 # ─────────────────────────────────────────────
 # Installing RPM Fusion
