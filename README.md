@@ -14,7 +14,7 @@ Small collection of Bash scripts for setting up a Fedora desktop, configuring GN
 
 - `googleDrive.sh` — Utility for configuring or syncing Google Drive resources. Depending on your system tools (e.g., `rclone`), this script helps set up authentication and mount/sync workflows. Inspect the script for the exact flow before use.
 
-- `bravePwa.sh` — Installs/uninstalls web apps (WhatsApp, Work WhatsApp, ChatGPT, Claude, Canva, Notion) as desktop launchers that open in Brave app-mode windows. Usage: `./bravePwa.sh install|uninstall|list [app ...]`. Work WhatsApp uses a separate Brave profile so both WhatsApp sessions can run side by side.
+- `bravePwa.sh` — Installs/uninstalls web apps (WhatsApp, Work WhatsApp, ChatGPT, Claude, Canva, Notion) as desktop launchers that open in Brave app-mode windows. Usage: `./bravePwa.sh install|uninstall|list [app ...]`. Each app runs as its own isolated Brave instance (own `--user-data-dir`) so it gets a correct, separate dock/taskbar icon on Wayland instead of grouping under Brave. On first install (with Brave closed) each app's data dir is seeded from your main Brave profile — via copy-on-write reflinks on Btrfs, so it's near-free on disk — carrying your logins, extensions and settings across. Work WhatsApp is excluded from seeding (see `NOSEED` in the script) so it starts logged out — scan a second number's QR to run a WhatsApp account separate from your main one.
 
 - `snapper.sh` — Helpers around `snapper` (Btrfs snapshot management). Provides shortcuts for creating, listing, and cleaning snapshots so you can manage system rollbacks. Run with care on systems using Btrfs.
 
