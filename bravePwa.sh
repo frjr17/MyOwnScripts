@@ -23,7 +23,7 @@ APPS=(
   "chatgpt|ChatGPT|https://chatgpt.com|https://cdn.jsdelivr.net/npm/simple-icons@11/icons/openai.svg|#ffffff"
   "claude|Claude|https://claude.ai|https://cdn.simpleicons.org/claude"
   "canva|Canva|https://www.canva.com"
-  "notion|Notion|https://www.notion.so|https://cdn.simpleicons.org/notion/white"
+  "notion|Notion|https://www.notion.so|https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg"
 )
 
 # Apps that must NOT inherit your main Brave profile — they need a fresh, independent
