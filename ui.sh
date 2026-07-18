@@ -72,7 +72,9 @@ rm -rf compiz-alike-magic-lamp-effect
 git clone https://github.com/hermes83/compiz-alike-magic-lamp-effect.git
 cd compiz-alike-magic-lamp-effect
 
-bash install.sh
+if ! bash install.sh; then
+  echo "⚠️ Compiz Alike Magic Lamp Effect install failed, continuing with the rest of the script."
+fi
 echo "✅ Compiz Alike Magic Lamp Effect installed successfully. (You may need to restart GNOME Shell for the changes to take effect.)"
 
 # Installing Hide Top Bar extension
