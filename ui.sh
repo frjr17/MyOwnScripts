@@ -3,6 +3,7 @@
 set -euo pipefail
 
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # ─────────────────────────────────────────────
 # Update system
 # ─────────────────────────────────────────────
@@ -171,5 +172,12 @@ echo "✅ Linux Dynamic Templates installed successfully."
 echo "📧 Installing Thunderbird..."
 sudo dnf install -y thunderbird
 echo "✅ Thunderbird installed successfully."
+
+# Installing mutter update 
+echo "🔄 Installing mutter update..."
+sudo dnf install \
+  $SCRIPT_DIR/mutter-rpms/mutter-50.3-2.1.nightlight.fc44.x86_64.rpm \
+  $SCRIPT_DIR/mutter-rpms/mutter-common-50.3-2.1.nightlight.fc44.noarch.rpm \
+  $SCRIPT_DIR/mutter-rpms/mutter-devel-50.3-2.1.nightlight.fc44.x86_64.rpm
 
 echo "✅ All done! Restart your GNOME session or run: gnome-shell --replace (on X11)"
