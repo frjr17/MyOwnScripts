@@ -15,7 +15,8 @@ sudo dnf update -y
 cd /tmp
 
 echo "🌟 Installing WhiteSur theme"
-git clone https://github.com/frjr17/WhiteSurInstaller.git 
+rm -rf WhiteSurInstaller   # rerun-safe: clone aborts under set -e if the dir exists
+git clone https://github.com/frjr17/WhiteSurInstaller.git
 cd ./WhiteSurInstaller
 
 chmod +x *.sh
@@ -68,6 +69,7 @@ done
 
 # Installing Compiz Alike Magic Lamp Effect
 echo "✨ Installing Compiz Alike Magic Lamp Effect"
+cd /tmp   # WhiteSur install above left us inside its clone dir
 rm -rf compiz-alike-magic-lamp-effect
 
 git clone https://github.com/hermes83/compiz-alike-magic-lamp-effect.git
@@ -80,6 +82,7 @@ echo "✅ Compiz Alike Magic Lamp Effect installed successfully. (You may need t
 
 # Installing Hide Top Bar extension
 echo "🔝 Installing Hide Top Bar extension"
+cd /tmp
 rm -rf hidetopbar
 
 git clone https://gitlab.gnome.org/tuxor1337/hidetopbar.git
@@ -151,7 +154,7 @@ echo "✅ Telegram installed successfully."
 # Docker Desktop
 echo "🚢 Installing Docker Desktop..."
 wget https://desktop.docker.com/linux/main/amd64/docker-desktop-x86_64.rpm -O docker-desktop.rpm
-sudo dnf install -y ./docker-desktop-x86_64.rpm
+sudo dnf install -y ./docker-desktop.rpm
 echo "✅ Docker Desktop installed successfully."
 
 # Musecore
@@ -163,6 +166,8 @@ echo "✅ Musecore installed successfully."
 
 # Linux Dynamic Templates
 echo "📁 Installing Linux Dynamic Templates..."
+cd /tmp
+rm -rf LinuxDynamicWallpapers
 git clone https://github.com/frjr17/LinuxDynamicWallpapers.git
 cd LinuxDynamicWallpapers
 sudo bash ./install.sh

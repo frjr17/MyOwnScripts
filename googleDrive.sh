@@ -28,7 +28,7 @@ Usage:
   $0 --init       Also run first baseline bisync with --resync
 
 Environment variables:
-  REMOTE_NAME     Default: gdrive
+  REMOTE_NAME     Default: googleDrive
   LOCAL_DIR       Default: \$HOME/GoogleDrive
   TIMER_INTERVAL  Default: 1m
   MAX_DELETE      Default: 100
@@ -42,32 +42,17 @@ EOF
   esac
 done
 
-need_cmd() {
-  if ! command -v "$1" >/dev/null 2>&1; then
-    echo "Missing command: $1"
-    return 1
-  fi
-}
-
 echo "Checking dependencies..."
 
+# cmd or cmd:package (when the dnf package name differs from the command)
 MISSING=0
-need_cmd rclone || MISSING=1
-need_cmd systemctl || MISSING=1
-need_cmd flock || MISSING=1
-need_cmd awk || MISSING=1
-
-if ! command -v notify-send >/dev/null 2>&1; then
-  echo "Missing notify-send. Install it with:"
-  echo "  sudo dnf install libnotify"
-  MISSING=1
-fi
-
-if ! command -v fusermount3 >/dev/null 2>&1; then
-  echo "Missing fusermount3. Install it with:"
-  echo "  sudo dnf install fuse3"
-  MISSING=1
-fi
+for dep in rclone systemctl flock notify-send:libnotify fusermount3:fuse3; do
+  cmd="${dep%%:*}"
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    echo "Missing $cmd. Install it with:  sudo dnf install ${dep#*:}"
+    MISSING=1
+  fi
+done
 
 if [ "$MISSING" -ne 0 ]; then
   echo "Install missing packages, then rerun this script."
@@ -122,9 +107,7 @@ REMOTE="${REMOTE_NAME}:"
 MAX_DELETE="${MAX_DELETE:-100}"
 
 LOG_DIR="$HOME/.cache/rclone"
-RUN_ID="$(date +%Y%m%d-%H%M%S)"
-LOG_FILE="$LOG_DIR/rclone-gdrive-bisync-$RUN_ID.log"
-LATEST_LOG="$LOG_DIR/rclone-gdrive-bisync.log"
+LOG_FILE="$LOG_DIR/rclone-gdrive-bisync.log"
 LOCK_FILE="$LOG_DIR/rclone-gdrive-bisync.lock"
 
 mkdir -p "$LOG_DIR"
@@ -154,6 +137,9 @@ if ! flock -n 9; then
   exit 0
 fi
 
+# ponytail: single log file, truncated per run; add rotation if history matters
+: > "$LOG_FILE"
+
 rclone bisync "$LOCAL" "$REMOTE" \
   --recover \
   --resilient \
@@ -167,8 +153,6 @@ rclone bisync "$LOCAL" "$REMOTE" \
   --log-level INFO
 
 STATUS=$?
-
-ln -sf "$LOG_FILE" "$LATEST_LOG"
 
 if [ "$STATUS" -eq 0 ]; then
   SUMMARY="$(summarize_changes "$LOG_FILE")"

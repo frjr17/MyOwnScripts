@@ -31,11 +31,7 @@ APPS=(
 # otherwise they'd clone the same session and show the same account as the seeded app.
 NOSEED=(work-whatsapp)
 
-is_noseed() {
-  local a
-  for a in "${NOSEED[@]}"; do [ "$a" = "$1" ] && return 0; done
-  return 1
-}
+is_noseed() { [[ " ${NOSEED[*]} " == *" $1 "* ]]; }
 
 usage() {
   cat <<EOF
@@ -88,7 +84,7 @@ seed_profile() {
 install_app() {
   IFS='|' read -r name display url icon_url fill <<<"$1"
   local domain ext icon desktop wmclass
-  domain="$(echo "$url" | sed -E 's|https?://||; s|/.*||')"
+  domain="${url#*//}" domain="${domain%%/*}"
   desktop="$APPS_DIR/brave-pwa-$name.desktop"
 
   # The Wayland app_id Brave emits for this instance (verified via WAYLAND_DEBUG).

@@ -50,7 +50,6 @@ sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin d
 
 sudo systemctl enable --now docker
 sudo usermod -aG docker "$USER"
-newgrp docker
 
 echo "✅ Docker installed and running!"
 
